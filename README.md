@@ -1,10 +1,6 @@
-<h1 align="center">LaserBot Battle Docker</h1>
+# LaserBot Battle Docker
 
-<div align="center">
-  Docker images compiled for <a href="https://github.com/ludusrusso/pp-robot-2018">LaserBot Battle</a>.
-</div>
-
-<br />
+  Docker images compiled for [LaserBot Battle](https://github.com/ludusrusso/pp-robot-2018).
 
 
 *This README is still a work in progess.*
@@ -72,22 +68,35 @@
   ```
 
   ### Master
-  Image for master webserver will be provided later on.
+  To get the Ubuntu docker image for the webserver, pull it from Docker Cloud:
+  
+  ```bash
+  $ docker pull stefanocirici/laserbotbattle:server
+  ```
 
 ---
 
 ## Run
 
   ### Start Raspberry Container
-  To run the image on Raspberry :
+  To run the image on Raspberry:
   
   ```bash
   $ docker run -it --privileged -v /var/run/dbus:/var/run/dbus stefanocirici/laserbotbattle:rosberry
   ```
   
+  Once the docker container is run, the ID_service_client script will automatically be executed (in a tmux shell).
+  
   ### Start Master Container
-  Image for master webserver will be provided later on.
-
+  To run the webserver image:
+  
+  ```bash
+  $ docker run -it --privileged -v /var/run/dbus:/var/run/dbus stefanocirici/laserbotbattle:server
+  ```
+  
+  Once the docker container is run, the roscore, rosbridge-server and main script will automatically be executed (in a tmux shell).
+  
+  
 ---
 
 ## License
