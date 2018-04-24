@@ -1,0 +1,5 @@
+#!/bin/bash
+
+chmod +x bin/cross-build-*
+chmod +x bin/qemu-arm-static
+chmod +x bin/resin-xbuild
