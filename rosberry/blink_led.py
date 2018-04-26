@@ -31,9 +31,3 @@ if __name__ == '__main__':
     if killer.kill_now:
       GPIO.output(18,GPIO.HIGH)
       break
-
-#### error read from terminal when launching the image from rpi
-Traceback (most recent call last):
-  File "/blink_led.py", line 21, in <module>
-    GPIO.setup(18,GPIO.OUT)
-RuntimeError: No access to /dev/mem.  Try running as root!
