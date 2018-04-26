@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+# change the owner and group of /dev/mem to root and gpio respectively.
+sudo chown root.gpio /dev/mem
+# gives the group read write access to this /dev/mem object.
+sudo chmod g+rw
+
 #call blinking led sccript
 python /blink_led.py & BLINK_ID=$!
 
