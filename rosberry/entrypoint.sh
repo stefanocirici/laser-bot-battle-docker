@@ -3,7 +3,7 @@ set -e
 
 # print first argument in green with white background
 function cmd {
-    echo -e "$(tput bold)$(tput setaf 28)$(tput setab 7)${1}$(tput sgr0)"
+    echo -e "$(tput bold)$(tput setaf 4)$(tput setab 7)${1}$(tput sgr0)"
 }
 
 
@@ -14,7 +14,7 @@ echo
 
 
 # change the owner and group of /dev/mem to root and gpio respectively.
-chown root.gpio /dev/mem
+chown root:gpio /dev/mem
 # gives the group read write access to this /dev/mem object.
 chmod g+rw /dev/mem
 
