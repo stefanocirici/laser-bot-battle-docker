@@ -28,9 +28,19 @@ catkin_make
 source devel/setup.bash
 
 # kill blinking led
-#kill -HUP $BLINK_ID
+#if ps -p $BLINK_ID > /dev/null
+#then
+#   kill -HUP $BLINK_ID
+#fi
 
-tmux -2
-./src/laser_bot_battle/scripts/ID_service_client.py
+# prepare tmux 3 split view
+tmux new-session -d -s session
+tmux split-window -v -d -t session:0.0
+# launch roscore on first panel
+tmux send-keys -t session:0.0 "./src/laser_bot_battle/scripts/ID_service_client.py" Enter
+
+# get tmux view (attach)
+tmux attach-session -t session
+
 
 exec "$@"
