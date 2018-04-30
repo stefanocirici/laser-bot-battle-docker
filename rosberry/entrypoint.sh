@@ -7,7 +7,7 @@ set -e
 #chmod g+rw /dev/mem
 
 #call blinking led sccript
-python /blink_led.py & BLINK_ID=$!
+#python /blink_led.py & BLINK_ID=$!
 
 # setup ros environment
 echo 'source /opt/ros/kinetic/setup.bash' >> ~/.bashrc
@@ -28,7 +28,7 @@ catkin_make
 source devel/setup.bash
 
 # kill blinking led
-kill -HUP $BLINK_ID
+#kill -HUP $BLINK_ID
 
 tmux -2
 ./src/laser_bot_battle/scripts/ID_service_client.py
