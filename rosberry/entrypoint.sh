@@ -14,9 +14,9 @@ echo
 
 
 # change the owner and group of /dev/mem to root and gpio respectively.
-chown root:gpio /dev/mem
+#chown root:gpio /dev/mem
 # gives the group read write access to this /dev/mem object.
-chmod g+rw /dev/mem
+#chmod g+rw /dev/mem
 
 #call blinking led sccript
 python /blink_led.py & BLINK_ID=$!
