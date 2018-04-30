@@ -16,8 +16,8 @@
     - [Raspberry](#raspberry)
     - [Master server](#master)
 - [Run](#run)
-    - [Start Raspberry Container](#start-raspberry-container)
-    - [Start Master Container](#start-master-container)
+    - [Start Rosberry Container](#start-rosberry-container)
+    - [Start Server Container](#start-server-container)
 - [License](#license)
 
 ---
@@ -78,7 +78,7 @@
 
 ## Run
 
-  ### Start Raspberry Container
+  ### Start Rosberry Container
   To run the image on Raspberry:
   
   ```bash
@@ -87,7 +87,20 @@
   
   Once the docker container is run, the ID_service_client script will automatically be executed (in a tmux shell).
   
-  ### Start Master Container
+  
+  To run the rosberry image on a x86_64 linux, qemu-user-static support is needed. To install it run:
+  
+  ```bash
+  $ apt update && apt install -y qemu qemu-user-static qemu-user binfmt-support
+  ```
+  
+  Now you can run the image binding /usr/bin/qemu-arm-static binary into the container:
+  
+  ```bash
+  $ docker run -it --privileged -v /var/run/dbus:/var/run/dbus -v /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static stefanocirici/laserbotbattle:rosberry
+  ```
+  
+  ### Start Server Container
   To run the webserver image:
   
   ```bash
