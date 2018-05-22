@@ -50,14 +50,6 @@ RUN pip install setuptools requests wheel RPi.GPIO
 # clone project repository into home
 RUN git clone https://github.com/ludusrusso/pp-robot-2018.git 
 
-# move to repo and catkin_make
-RUN . /opt/ros/kinetic/setup.sh
-RUN cd pp-robot-2018/ ;\
-    git checkout beta ;\
-    cd raspberry ;\
-    catkin_make clean ;\
-    catkin_make ;
-
 # copy avahi configuration file
 COPY ./avahi-daemon.conf /etc/avahi/
 

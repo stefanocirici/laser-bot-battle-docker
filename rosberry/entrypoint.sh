@@ -19,15 +19,21 @@ echo
 # led ON
 python /led_on.py
 
+# move to repo and catkin_make
+source /opt/ros/kinetic/setup.bash
+cd pp-robot-2018/
+git pull
+git checkout beta
+cd raspberry
+catkin_make clean
+catkin_make
+
 # setup ros environment
 echo 'source /opt/ros/kinetic/setup.bash' >> ~/.bashrc
 echo 'source /pp-robot-2018/raspberry/devel/setup.bash' >> ~/.bashrc
 echo 'export ROS_IP=$(hostname -I | cut -d " " -f 1)' >> ~/.bashrc
 echo 'export ROS_MASTER_URI=http://laser_bot_master.local:11311' >> ~/.bashrc
 source ~/.bashrc
-
-# move to project folder
-cd pp-robot-2018/raspberry/
 
 
 cmd "--------------------------------------------------------------------------------"
