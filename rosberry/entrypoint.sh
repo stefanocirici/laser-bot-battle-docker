@@ -24,8 +24,7 @@ echo 'source /opt/ros/kinetic/setup.bash' >> ~/.bashrc
 echo 'source /pp-robot-2018/raspberry/devel/setup.bash' >> ~/.bashrc
 echo 'export ROS_IP=$(hostname -I | cut -d " " -f 1)' >> ~/.bashrc
 echo 'export ROS_MASTER_URI=http://laser_bot_master.local:11311' >> ~/.bashrc
-
-source /opt/ros/kinetic/setup.bash
+source ~/.bashrc
 
 # move to project folder
 cd pp-robot-2018/raspberry/
