@@ -51,7 +51,7 @@ RUN pip install setuptools requests wheel RPi.GPIO
 RUN git clone https://github.com/ludusrusso/pp-robot-2018.git 
 
 # move to repo and catkin_make
-RUN source /opt/ros/kinetic/setup.sh
+RUN . /opt/ros/kinetic/setup.sh
 RUN cd pp-robot-2018/ ;\
     git checkout beta ;\
     cd raspberry ;\
