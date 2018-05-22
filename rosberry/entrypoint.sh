@@ -1,9 +1,13 @@
 #!/bin/bash
 set -e
 
-# print first argument in green with white background
+# print first argument in blue with white background
 function cmd {
     echo -e "$(tput bold)$(tput setaf 4)$(tput setab 7)${1}$(tput sgr0)"
+}
+# print first argument in red with white background
+function err {
+    echo -e "$(tput bold)$(tput setaf 1)$(tput setab 7)${1}$(tput sgr0)"
 }
 
 
@@ -12,14 +16,8 @@ cmd "------------------------------ Starting container -------------------------
 cmd "--------------------------------------------------------------------------------"
 echo
 
-
-# change the owner and group of /dev/mem to root and gpio respectively.
-#chown root:gpio /dev/mem
-# gives the group read write access to this /dev/mem object.
-#chmod g+rw /dev/mem
-
-#call blinking led sccript
-python /blink_led.py & BLINK_ID=$!
+# led ON
+python /led_on.py
 
 # setup ros environment
 echo 'source /opt/ros/kinetic/setup.bash' >> ~/.bashrc
@@ -29,41 +27,33 @@ echo 'export ROS_MASTER_URI=http://laser_bot_master.local:11311' >> ~/.bashrc
 
 source /opt/ros/kinetic/setup.bash
 
+# move to project folder
+cd pp-robot-2018/raspberry/
 
-cmd "--------------------------------------------------------------------------------"
-cmd "---------------------------- Pulling updated files -----------------------------"
-cmd "--------------------------------------------------------------------------------"
-echo
-
-cd pp-robot-2018/
-git checkout beta
-git pull origin beta
-
-cd raspberry
-#rm -rf build devel
-#catkin_make clean
-catkin_make
-source devel/setup.bash
-
-# kill blinking led
-if ps -p $BLINK_ID > /dev/null
-then
-    kill -HUP $BLINK_ID
-fi
 
 cmd "--------------------------------------------------------------------------------"
 cmd "--------------------------- Starting service client ----------------------------"
 cmd "--------------------------------------------------------------------------------"
 echo
 
-## prepare tmux 3 split view
-#tmux new-session -d -s session
-#tmux split-window -v -d -t session:0.0
-## launch roscore on first panel
-#tmux send-keys -t session:0.0 "./src/laser_bot_battle/scripts/ID_service_client.py" Enter
+# call blinking led script
+python /blink_led.py & BLINK_ID=$!
 
-## get tmux view (attach)
-#tmux attach-session -t session
+# launch robot script
+./src/laser_bot_battle/scripts/ID_service_client.py
+
+
+err "--------------------------------------------------------------------------------"
+err "------------------------------------ ERROR -------------------------------------"
+err "--------------------------------------------------------------------------------"
+echo
+
+# If Here, an error has occurerd
+# kill blinking led
+if ps -p $BLINK_ID > /dev/null
+then
+    kill -HUP $BLINK_ID
+fi
 
 
 exec "$@"
