@@ -6,32 +6,33 @@ set -e
 echo 'source /opt/ros/kinetic/setup.bash' >> ~/.bashrc
 echo 'source /pp-robot-2018/server_ws/devel/setup.bash' >> ~/.bashrc
 echo 'export ROS_IP=$(hostname -I | cut -d " " -f 1)' >> ~/.bashrc
+source ~/.bashrc
 
-source /opt/ros/kinetic/setup.bash
+# move to project folder
+cd pp-robot-2018/server_ws
 
-cd pp-robot-2018/
-git checkout beta
-git pull origin beta
+# launch roscore
+roscore & ROSCORE_ID=$!
+sleep 2
 
-cd server_ws
-#rm -rf build devel
-#catkin_make clean
-catkin_make
-source devel/setup.bash
+# launch rosbridge webserver
+./src/laser_bot_battle/scripts/rosbridge_launch.sh & ROSBRIDGE_ID=$!
+sleep 2
 
-# prepare tmux 3 split view
-tmux new-session -d -s session
-tmux split-window -v -d -t session:0.0
-tmux split-window -v -d -t session:0.0
-# launch roscore on first panel
-tmux send-keys -t session:0.0 "roscore" Enter
-# launch rosbridge webserver on second panel
-tmux send-keys -t session:0.1 "./src/laser_bot_battle/scripts/rosbridge_launch.sh" Enter
-# launch main (app + service server) on third panel
-tmux send-keys -t session:0.2 "./src/laser_bot_battle/scripts/main.py" Enter
+# launch main (app + service server)
+./src/laser_bot_battle/scripts/main.py & MAIN_ID=$!
+sleep 2
 
-# get tmux view (attach)
-tmux attach-session -t session
+# print process id message
+echo "In the eventuality of a crash, signle processes can be killed running:"
+echo "    \$ kill <ID>"
+echo "The list of the processes IDs is below:"
+
+printf "\n %-20s | %-10s\n" "PROCESSES" "ID"
+printf " %s\n" "-------------------- | ----------"
+printf " %-20s | %-10s\n" "roscore" "$ROSCORE_ID"
+printf " %-20s | %-10s\n" "rosbridge" "$ROSBRIDGE_ID"
+printf " %-20s | %-10s\n\n" "main" "$MAIN_ID"
 
 
 exec "$@"
