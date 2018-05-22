@@ -1,6 +1,14 @@
 #!/bin/bash
 set -e
 
+# move to repo and catkin_make
+source /opt/ros/kinetic/setup.bash
+cd pp-robot-2018/
+git pull
+git checkout beta
+cd server_ws 
+catkin_make clean
+catkin_make
 
 # setup ros environment
 echo 'source /opt/ros/kinetic/setup.bash' >> ~/.bashrc
@@ -8,8 +16,6 @@ echo 'source /pp-robot-2018/server_ws/devel/setup.bash' >> ~/.bashrc
 echo 'export ROS_IP=$(hostname -I | cut -d " " -f 1)' >> ~/.bashrc
 source ~/.bashrc
 
-# move to project folder
-cd pp-robot-2018/server_ws
 
 # launch roscore
 roscore & ROSCORE_ID=$!
