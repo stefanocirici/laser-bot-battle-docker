@@ -3,28 +3,17 @@
   Docker images compiled for [LaserBot Battle](https://github.com/ludusrusso/pp-robot-2018).
 
 
-*This README is still a work in progess.*
-*Further information about installation, usage and contribution method will be introduced after initial steps of development.*
-
 ---
 
 ## Table of Contents
-- [Installation](#installation)
-    - [Docker](#docker)
-      - [Install Docker](#install-docker)
-      - [Uninstall Docker](#uninstall-docker)
-    - [Raspberry](#raspberry)
-    - [Master server](#master)
-- [Run](#run)
-    - [Start Rosberry Container](#start-rosberry-container)
-    - [Start Server Container](#start-server-container)
+- [Install Docker](#install-docker)
+- [Uninstall Docker](#uninstall-docker)
+- [Get Raspberry image](#get-raspberry-image)
+- [Get Master server image](#get-master-server-image)
 - [License](#license)
 
 ---
 
-## Installation
-
-  ### Docker
   
   #### Install Docker
   To automatically install docker-ce on the system
@@ -60,55 +49,19 @@
     
   From docker [documentation](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-convenience-script).
 
-  ### Raspberry
+  ### Get Raspberry image
   To get the Raspberry Pi docker image, pull it from Docker Cloud:
   
   ```bash
   $ docker pull stefanocirici/laserbotbattle:rosberry
   ```
 
-  ### Master
+  ### Get Master server image
   To get the Ubuntu docker image for the webserver, pull it from Docker Cloud:
   
   ```bash
   $ docker pull stefanocirici/laserbotbattle:server
   ```
-
----
-
-## Run
-
-  ### Start Rosberry Container
-  To run the image on Raspberry:
-  
-  ```bash
-  $ docker run -it --privileged -v /var/run/dbus:/var/run/dbus stefanocirici/laserbotbattle:rosberry
-  ```
-  
-  Once the docker container is run, the ID_service_client script will automatically be executed (in a tmux shell).
-  
-  
-  To run the rosberry image on a x86_64 linux, qemu-user-static support is needed. To install it run:
-  
-  ```bash
-  $ apt update && apt install -y qemu qemu-user-static qemu-user binfmt-support
-  ```
-  
-  Now you can run the image binding /usr/bin/qemu-arm-static binary into the container:
-  
-  ```bash
-  $ docker run -it --privileged -v /var/run/dbus:/var/run/dbus -v /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static stefanocirici/laserbotbattle:rosberry
-  ```
-  
-  ### Start Server Container
-  To run the webserver image:
-  
-  ```bash
-  $ docker run -it --privileged -v /var/run/dbus:/var/run/dbus stefanocirici/laserbotbattle:server
-  ```
-  
-  Once the docker container is run, the roscore, rosbridge-server and main script will automatically be executed (in a tmux shell).
-  
   
 ---
 
