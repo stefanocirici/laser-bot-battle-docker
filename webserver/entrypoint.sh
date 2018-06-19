@@ -30,9 +30,9 @@ sleep 2
 sleep 2
 
 # print process id message
-echo "In the eventuality of a crash, signle processes can be killed running:"
+echo "In the eventuality of a crash, single processes can be killed running:"
 echo "    \$ kill <ID>"
-echo "The list of the processes IDs is below:"
+echo "The list of the processes IDs is reported below:"
 
 printf "\n %-20s | %-10s\n" "PROCESSES" "ID"
 printf " %s\n" "-------------------- | ----------"
