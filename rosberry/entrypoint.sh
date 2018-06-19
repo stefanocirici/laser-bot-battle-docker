@@ -23,7 +23,7 @@ python /led_on.py
 source /opt/ros/kinetic/setup.bash
 cd pp-robot-2018/
 git pull
-git checkout beta
+#git checkout beta
 cd raspberry
 catkin_make clean
 catkin_make
