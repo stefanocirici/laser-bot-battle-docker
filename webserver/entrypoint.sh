@@ -5,7 +5,7 @@ set -e
 source /opt/ros/kinetic/setup.bash
 cd pp-robot-2018/
 git pull
-git checkout beta
+#git checkout beta
 cd server_ws 
 catkin_make clean
 catkin_make
