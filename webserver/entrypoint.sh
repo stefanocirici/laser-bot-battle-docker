@@ -3,6 +3,9 @@ set -e
 
 # move to repo and catkin_make
 source /opt/ros/kinetic/setup.bash
+rosdep init
+rosdep update
+
 cd pp-robot-2018/
 git pull
 #git checkout beta
