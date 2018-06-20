@@ -3,8 +3,6 @@ set -e
 
 # move to repo and catkin_make
 source /opt/ros/kinetic/setup.bash
-rosdep init
-rosdep update
 
 cd pp-robot-2018/
 git pull
@@ -26,7 +24,7 @@ sleep 2
 
 # launch rosbridge webserver
 ./src/laser_bot_battle/scripts/rosbridge_launch.sh & ROSBRIDGE_ID=$!
-sleep 2
+sleep 5 
 
 # launch main (app + service server)
 ./src/laser_bot_battle/scripts/main.py & MAIN_ID=$!
